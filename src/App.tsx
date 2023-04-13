@@ -1,11 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Shipment } from './pages/shipment';
+import { StoreProvider} from "easy-peasy";
+import store from '../src/store';
 
 function App() {
   return (
     <div className="App">
-     <h1>ljf34oihroi34jhiubi</h1>
+       <StoreProvider store={store}>
+     <Shipment/>
+     </StoreProvider>
     </div>
   );
 }
