@@ -9,12 +9,19 @@ export interface ShipingState {
   shipingList :any
 }
 
+export interface demo {
+  type :number,
+  payload:any,
+  meta:any
+}
+
+
 const initialState: ShipingState = {
   shipingList:[]
 }
 
 export const shipmentData = createAsyncThunk(
-  'login/shipmentData',
+  'shipment/shipmentData',
   async (userData: IShipForm) => {
     console.log("userData",userData)
     const response = await getData(userData)
@@ -24,7 +31,7 @@ export const shipmentData = createAsyncThunk(
 )
 
 export const shipmentSlice = createSlice({
-  name: 'login',
+  name: 'shipment',
   initialState,
   reducers: {
    
@@ -37,17 +44,17 @@ export const shipmentSlice = createSlice({
     builder.addCase(increment,(state:any)=>{
       state.name="name updated"
     })
-    builder.addCase(shipmentData.pending, (state:any, action:any) => {
+    builder.addCase(shipmentData.pending, (state:any, action:PayloadAction<demo>) => {
       // Add user to the state array
       state.testingValue="please wait...."
       // toast("please wait .... ")
     })
-    builder.addCase(shipmentData.fulfilled, (state:any, action:any) => {
+    builder.addCase(shipmentData.fulfilled, (state:any, action:PayloadAction<demo>) => {
       // console.log("state",state.name)
-      console.log("action",action?.payload)
+      console.log("action",action)
       // Add user to the state array
       state.shipingList=action?.payload
-      // toast("login successfully")
+      // toast("shipment successfully")
     })
 
   }
