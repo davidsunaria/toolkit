@@ -3,6 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import rootReducer from "../../Redux/rootReducer";
 import { shipmentData } from "../../Redux/slices/shipment";
 import { RootState } from "../../Redux/store";
+import file from "../../img/file.png"
+import logo from "../../img/logo.png"
+import noti from "../../img/noti.png"
+import setting from "../../img/setting.png"
+import plus from "../../img/plus.png"
+import moment from "moment";
 
 export const Shipment = ()=>{
 
@@ -14,12 +20,13 @@ export const Shipment = ()=>{
     //     console.log("hi",count)
     //   }
       useEffect(()=>{
-       dispatch(shipmentData({param:"todos"})) 
+       dispatch(shipmentData({param:"shipment"})) 
 
       },[])
     return(
         <>
-        <button className="btn btn-info mt-3">start</button>
+       
+        <h1>ifn34ioio</h1>
         </>
     )
 }

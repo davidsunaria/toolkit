@@ -8,8 +8,8 @@ const Layout: FC<Props> = ({ children }) => {
  
   return (
       <Fragment>
-        <Header/>
-        {children}
+         <Header/> 
+        {/* {children} */}
       </Fragment>
   )
 }
