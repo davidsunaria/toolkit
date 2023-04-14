@@ -18,7 +18,7 @@ export const Shipment = ()=>{
       },[])
     return(
         <>
-        <h1>shipment data</h1>
+        <h1>yh</h1>
         </>
     )
 }
