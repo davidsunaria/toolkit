@@ -1,24 +1,25 @@
 import React,{ useEffect, useState } from "react";
-// import { useStoreActions, useStoreState } from "easy-peasy";
-import {useStoreState, useStoreActions } from "../../store";
+import { useSelector, useDispatch } from "react-redux";
+import rootReducer from "../../Redux/rootReducer";
+import { shipmentData } from "../../Redux/slices/shipment";
+import { RootState } from "../../Redux/store";
 
 export const Shipment = ()=>{
 
-    const shipmentData= useStoreState((state) => state.shipment.shipmentData);
-    console.log("shipmentData",shipmentData)
-    //Actions
-    const getShipmentData = useStoreActions((actions) => actions.shipment.getShipmentData);
+  const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state?.shipmentReducer?.shipingList);
+  console.log("dispatch",count)
 
-    const getData = async () => {
-        await getShipmentData({ param:"comments"});
-      }
+    // const getData = async () => {
+    //     console.log("hi",count)
+    //   }
       useEffect(()=>{
-        getData()
+       dispatch(shipmentData({param:"todos"})) 
 
       },[])
     return(
         <>
-        <h1>yh</h1>
+        <button className="btn btn-info mt-3">start</button>
         </>
     )
 }

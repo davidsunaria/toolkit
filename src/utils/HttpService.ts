@@ -1,11 +1,11 @@
 import axios from "axios";
 import { getToken, handleInvalidToken } from './Service';
 const axiosApi = axios.create({
-  headers: {
-    Accept: "application/json",
-    "Content-type": "application/json",
-    language: `EN`
-  }
+  // headers: {
+  //   Accept: "application/json",
+  //   "Content-type": "application/json",
+  //   language: `EN`
+  // }
 });
 // doing something with the request
 axiosApi.interceptors.request.use((request: any) => {
@@ -58,6 +58,6 @@ const objectToQuery = (obj: any) => {
 }
 // const apiUrl = process.env.REACT_APP_API_URL;
 
-const apiUrl = "https://jsonplaceholder.typicode.com/"
+const apiUrl = "https://jsonplaceholder.typicode.com"
 
 export { objectToQuery, axiosApi, apiUrl};
