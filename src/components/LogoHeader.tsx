@@ -10,7 +10,7 @@ const LogoHeader: React.FC = (): JSX.Element => {
     return (
       <Fragment>
          <div className="container-fluid">
-        <header className="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+        <header className="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar p-0">
         <a className="navbar-brand mr-0 mr-md-2"  aria-label="Bootstrap">
 		  	<div className="logo">
 				<img src={logo}/>

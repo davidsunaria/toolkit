@@ -9,7 +9,7 @@ const Layout: FC<Props> = ({ children }) => {
   return (
       <Fragment>
          <Header/> 
-        {/* {children} */}
+         {children} 
       </Fragment>
   )
 }
