@@ -1,31 +1,31 @@
-import {createAsyncThunk,  createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { increment, incrementByAmount } from './count'
-import { getData } from '../../api'
+import {createAsyncThunk,  createSlice ,current } from '@reduxjs/toolkit'
+import type { PayloadAction,ActionReducerMapBuilder } from '@reduxjs/toolkit'
+import { getData,deleteData } from '../../api'
 import type {} from 'redux-thunk/extend-redux'
-import { IShipForm } from '../../interfaces'
+import { IShipForm , ITableData, ShipingState ,IActionPayload} from '../../interfaces'
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-export interface ShipingState {
-  shipingList :any
-}
-
-export interface demo {
-  type :number,
-  payload:any,
-  meta:any
-}
 
 
 const initialState: ShipingState = {
-  shipingList:[]
+  shipingList:[],
+  isLoading:false,
+  promiseReject:false
 }
 
 export const shipmentData = createAsyncThunk(
   'shipment/shipmentData',
-  async (userData: IShipForm) => {
-    console.log("userData",userData)
-    const response = await getData(userData)
-    console.log("response",response)
+  async (shipQuery: IShipForm) => {
+    const response = await getData(shipQuery)
+    return response
+  }
+)
+
+export const deleteShipmentData = createAsyncThunk(
+  'shipment/shipmentData/delete',
+  async (shipQuery: IShipForm) => {
+    const response = await deleteData(shipQuery)
     return response
   }
 )
@@ -34,34 +34,52 @@ export const shipmentSlice = createSlice({
   name: 'shipment',
   initialState,
   reducers: {
-   
+    setLoading:(state)=>{
+      state.isLoading=true
+    }
   },
-
+ 
   extraReducers:(builder:any)=>{
-    builder.addCase(incrementByAmount,(state:any,action:any)=>{
-       state.name=action.payload
+    builder.addCase(shipmentData.pending, (state:ShipingState, action:PayloadAction<IShipForm>) => {
+      state.isLoading=true
+      state.promiseReject=false
     })
-    builder.addCase(increment,(state:any)=>{
-      state.name="name updated"
-    })
-    builder.addCase(shipmentData.pending, (state:any, action:PayloadAction<demo>) => {
-      // Add user to the state array
-      state.testingValue="please wait...."
-      // toast("please wait .... ")
-    })
-    builder.addCase(shipmentData.fulfilled, (state:any, action:PayloadAction<demo>) => {
-      // console.log("state",state.name)
-      console.log("action",action)
-      // Add user to the state array
+    builder.addCase(shipmentData.fulfilled,  (state:ShipingState, action:PayloadAction<IShipForm>) => {
       state.shipingList=action?.payload
-      // toast("shipment successfully")
+      state.isLoading=false
+      state.promiseReject=false
     })
 
+    builder.addCase(shipmentData.rejected, (state:ShipingState, action:PayloadAction<IShipForm>) => {
+      state.isLoading=false
+      state.promiseReject=true
+      toast.success("api failed");
+    })
+
+    builder.addCase(deleteShipmentData.pending, (state:ShipingState, action:PayloadAction<IShipForm>) => {
+      state.promiseReject=false
+    })
+    builder.addCase(deleteShipmentData.fulfilled, (state:ShipingState, action:PayloadAction<IShipForm>) => {
+      let filterData =  current(state)?.shipingList?.filter((data:ITableData,i:number)=>{
+        if(data?.id!==action?.payload?.id){
+         return true
+        }
+   }
+   )
+      state.shipingList=filterData
+      toast.success("Data Deleted");
+      state.promiseReject=false
+    })
+
+    builder.addCase(deleteShipmentData.rejected, (state:ShipingState, action:PayloadAction<IShipForm>) => {
+      state.promiseReject=true
+      toast.success("api failed");
+    })
   }
   
 })
 
 // Action creators are generated for each case reducer function
-// export const { changeName } = shipmentSlice.actions
+ export const { setLoading} = shipmentSlice.actions
 
 export default shipmentSlice.reducer
