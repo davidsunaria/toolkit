@@ -1,12 +1,9 @@
 import React, { FC, Fragment, ReactNode } from "react";
-import Header from '../layouts/Header';
 import setting from ".././img/setting.png"
 import search from ".././img/search.png"
 import ellipsis from ".././img/three-ellipsis.png"
 
-interface Props {
-  children: ReactNode;
-}
+
 const LastHeader:React.FC = (): JSX.Element =>{
  
   return (

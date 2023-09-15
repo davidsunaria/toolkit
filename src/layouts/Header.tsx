@@ -12,7 +12,6 @@ const Header: React.FC = (): JSX.Element => {
       <HeaderIcons/>
       <LastHeader/>
       </div>
-        {/* <HeaderIcons/> */}
     </Fragment>
   );
 };

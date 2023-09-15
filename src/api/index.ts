@@ -1,6 +1,5 @@
 import axios from "axios";
 import { IShipForm } from '../interfaces';
-// const apiUrl = process.env.REACT_APP_API_URL;
 
 const apiUrl = "https://643979ac4660f26eb1b41543.mockapi.io/"
 
@@ -8,7 +7,6 @@ const apiUrl = "https://643979ac4660f26eb1b41543.mockapi.io/"
 
 
 export const getData = async (formData:IShipForm) => {
-  console.log("formData?.param",formData?.param,`${apiUrl}/${formData?.param}`)
   try {
     let response = await axios.get(`${apiUrl}/${formData?.param}`);
     return response?.data;
@@ -16,3 +14,14 @@ export const getData = async (formData:IShipForm) => {
     return error?.response?.data;
   }
 };
+
+
+export const deleteData = async (formData:IShipForm) => {
+  try {
+    let response = await axios.delete(`${apiUrl}/${formData?.param}/${formData?.id}`);
+    return response?.data;
+  } catch (error:any) {
+    return error?.response?.data;
+  }
+};
+

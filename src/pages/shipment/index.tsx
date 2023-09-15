@@ -1,35 +1,32 @@
 import React,{ useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import rootReducer from "../../Redux/rootReducer";
-import { shipmentData } from "../../Redux/slices/shipment";
+import { shipmentData,deleteShipmentData } from "../../Redux/slices/shipment";
 import { RootState } from "../../Redux/store";
-import file from "../../img/file.png"
-import logo from "../../img/logo.png"
-import noti from "../../img/noti.png"
-import setting from "../../img/setting.png"
+import { ITableData } from "../../interfaces";
 import ellipsis from "../../img/three-ellipsis.png"
 import headphone from "../../img/headphones.png"
 import moment from "moment";
 
-export const Shipment = ()=>{
+ const Shipment = ()=>{
 
   const dispatch = useDispatch();
-  const count = useSelector((state: RootState) => state?.shipmentReducer?.shipingList);
-  console.log("dispatch",count)
+  const shipingList = useSelector((state: RootState) => state?.shipmentReducer?.shipingList);
+  useEffect(()=>{
+    dispatch(shipmentData({param:"shipment"})) 
+  },[])
 
-    // const getData = async () => {
-    //     console.log("hi",count)
-    //   }
-      useEffect(()=>{
-       dispatch(shipmentData({param:"shipment"})) 
+ const deleteApi = async(id:number)=>{
+   await dispatch(deleteShipmentData({param:"shipment",id:id}))
+  
 
-      },[])
+ }
+
     return(
         <>
        
        <div className="container-fluid">
-    <div className="table-responsive">
-    <table className="table table-responsive table-borderless">
+        <div className="table-responsive">
+        <table className="table table-responsive table-borderless">
         
       <thead>
         <tr style={{borderTop:"1px solid #000000",borderBottom:"1px solid #000000"}}>
@@ -48,125 +45,31 @@ export const Shipment = ()=>{
         </tr>
       </thead>
   <tbody>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
-    <tr>
-      <th scope="row"><input className="form-check-input" type="checkbox"/></th>
-      <td><img src={ellipsis} style={{width:"15px"}}/></td>
-      <td>2016/000008S</td>
-      <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">South American Beef Inc</span></td>
-      <td>China</td>
-      <td>Busan</td>
-      <td>16/03/2022</td>
-      <td>16/03/2022</td>
-      <td>Complete</td>
-      <td>MSC ROMA 009</td>
-      <td>16/03/2022</td>
-      <td>Ashwani Kumar</td>
-    </tr>
+
+    {
+          shipingList && shipingList?.length ? shipingList?.map((val:ITableData,i:number)=>{
+             return <>
+              <tr key={i}>
+                <th scope="row"><input className="form-check-input" type="checkbox"/></th>
+                <td title="Delete" onClick={()=> deleteApi(val?.id)}><img src={ellipsis} style={{width:"15px"}}/></td>
+                <td>{val?.shipment}</td>
+                <td><i className="fa fa-check-circle-o green"></i><span className="ms-1">{val?.buyer}</span></td>
+                <td>{val?.dest}</td>
+                <td>{val?.discharge}</td>
+                <td>{moment(val?.cargo).format('L')}</td>
+                <td>{moment(val?.departure).format('L')}</td>
+                <td>{val?.status}</td>
+                <td>{val?.vessel}</td>
+                <td>{moment(val?.created).format('L')}</td>
+                <td>{val?.assignee}</td>
+              </tr>
+             </>
+          }) : <tr><td colSpan={12}>Data Not Found</td></tr>
+        }
   </tbody>
 </table>
   </div>
 </div>
-
-
-
 
     <div className="container-fluid middle">
   <div className="pagination">
@@ -211,5 +114,5 @@ export const Shipment = ()=>{
     )
 }
 
-
+export default Shipment
 
